@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Induk HCGA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="gelap">
+  <div id="bg" class="bg" data-bg="hutan" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">HCGA<span>.portal</span></div>
+    <nav class="tools" aria-label="Pengaturan">
+      <button id="btnSuara" class="icon-btn" aria-label="Suara gemercik air" aria-pressed="true" title="Suara gemercik air">🔊</button>
+      <button id="btnTema" class="icon-btn" aria-label="Ganti tema terang atau gelap" title="Ganti tema">🌓</button>
+      <button id="btnBg" class="icon-btn" aria-label="Ganti background" title="Ganti background">🖼️</button>
+      <button id="btnLogout" class="icon-btn" aria-label="Keluar" title="Keluar" hidden>⏻</button>
+    </nav>
+    <div id="panelBg" class="panel-bg" hidden></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow reveal">Human Capital &amp; General Affairs</p>
+      <h1 class="reveal">Semua aplikasi HCGA, <span>satu pintu masuk</span>.</h1>
+      <p class="lead reveal">Pilih unit kerja, baca petunjuk singkat, lalu buka aplikasi yang Anda butuhkan.</p>
+      <a class="btn-utama reveal" href="#menu">Jelajahi Aplikasi</a>
+    </section>
+
+    <section id="menu" class="menu-wrap">
+      <div class="cari-wrap reveal">
+        <input id="cari" type="search" placeholder="Cari aplikasi, misalnya: memo" aria-label="Cari aplikasi" />
+      </div>
+      <p id="status" class="status" role="status"></p>
+      <p id="kosong" class="status" hidden>Aplikasi tidak ditemukan.</p>
+      <div id="daftarUnit"></div>
+    </section>
+
+    <section id="kalender" class="kal-wrap reveal">
+      <div class="kal-head-bar">
+        <button id="kalPrev" class="icon-btn" aria-label="Bulan sebelumnya">‹</button>
+        <h2 id="kalJudul"></h2>
+        <button id="kalNext" class="icon-btn" aria-label="Bulan berikutnya">›</button>
+      </div>
+      <div id="kalGrid" class="kal-grid"></div>
+      <p class="kal-note">Kalender ini hanya untuk tampilan. Catat memo di menu Info Memo dan Agenda.</p>
+    </section>
+  </main>
+
+  <footer class="footer">Tim HCGA · Web Induk Aplikasi</footer>
+
+  <div id="loginOverlay" class="overlay" hidden>
+    <form id="formLogin" class="login-card">
+      <h2>Masuk</h2>
+      <p>Gunakan akun email internal organisasi.</p>
+      <label>Email<input id="email" type="email" required autocomplete="username" /></label>
+      <label>Kata sandi<input id="password" type="password" required autocomplete="current-password" /></label>
+      <button class="btn-utama" type="submit">Masuk</button>
+      <p id="loginMsg" class="err" role="alert"></p>
+    </form>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
