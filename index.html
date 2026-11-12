@@ -5,29 +5,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Web Induk HCGA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-theme="gelap">
-  <div id="bg" class="bg" data-bg="hutan" aria-hidden="true"></div>
+  <div id="bg" class="bg" data-scene="daun" aria-hidden="true"></div>
 
   <header class="topbar">
-    <div class="brand">HCGA<span>.portal</span></div>
-    <nav class="tools" aria-label="Pengaturan">
-      <button id="btnSuara" class="icon-btn" aria-label="Suara gemercik air" aria-pressed="true" title="Suara gemercik air">🔊</button>
-      <button id="btnTema" class="icon-btn" aria-label="Ganti tema terang atau gelap" title="Ganti tema">🌓</button>
-      <button id="btnBg" class="icon-btn" aria-label="Ganti background" title="Ganti background">🖼️</button>
-      <button id="btnLogout" class="icon-btn" aria-label="Keluar" title="Keluar" hidden>⏻</button>
+    <a class="brand" href="#hero">HCGA<span>.portal</span></a>
+    <nav class="nav" aria-label="Navigasi utama">
+      <a href="#hero">Beranda</a>
+      <a href="#menu">Aplikasi</a>
+      <a href="#kalender">Kalender</a>
     </nav>
-    <div id="panelBg" class="panel-bg" hidden></div>
+    <div class="tools">
+      <button id="btnSuara" class="icon-btn" type="button" aria-label="Suara gemercik air" aria-pressed="true" title="Suara gemercik air">🔊</button>
+      <button id="btnTema" class="icon-btn" type="button" aria-label="Ganti tema terang atau gelap" title="Ganti tema">🌓</button>
+      <button id="btnBg" class="icon-btn" type="button" aria-label="Ganti background" aria-expanded="false" aria-controls="panelBg" title="Ganti background">🖼️</button>
+      <button id="btnLogout" class="icon-btn" type="button" aria-label="Keluar" title="Keluar" hidden>⏻</button>
+    </div>
+    <div id="panelBg" class="panel-bg glass" role="dialog" aria-label="Pilih background" hidden></div>
   </header>
 
   <main>
-    <section class="hero">
-      <p class="eyebrow reveal">Human Capital &amp; General Affairs</p>
-      <h1 class="reveal">Semua aplikasi HCGA, <span>satu pintu masuk</span>.</h1>
-      <p class="lead reveal">Pilih unit kerja, baca petunjuk singkat, lalu buka aplikasi yang Anda butuhkan.</p>
-      <a class="btn-utama reveal" href="#menu">Jelajahi Aplikasi</a>
+    <section id="hero" class="hero">
+      <div id="scene" class="scene" data-scene="daun" aria-hidden="true">
+        <div class="scene-dasar"></div>
+
+        <!-- Ilustrasi daun dengan tetesan air (bawaan). Foto sendiri bisa diunggah lewat tombol background. -->
+        <svg id="daunSvg" class="daun" viewBox="0 0 1600 900" preserveAspectRatio="xMaxYMid slice" focusable="false">
+          <defs>
+            <linearGradient id="gBase" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#06261a" />
+              <stop offset=".55" stop-color="#0c3b22" />
+              <stop offset="1" stop-color="#145a2c" />
+            </linearGradient>
+            <linearGradient id="gDaun1" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#0b3a1b" />
+              <stop offset=".55" stop-color="#1f7d3b" />
+              <stop offset="1" stop-color="#86d65c" />
+            </linearGradient>
+            <linearGradient id="gDaun2" x1="1" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#082a15" />
+              <stop offset=".6" stop-color="#15602e" />
+              <stop offset="1" stop-color="#4fae45" />
+            </linearGradient>
+            <linearGradient id="gKilauDaun" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff" stop-opacity=".22" />
+              <stop offset=".5" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+            <radialGradient id="gBokeh">
+              <stop offset="0" stop-color="#d6ff9a" stop-opacity=".5" />
+              <stop offset="1" stop-color="#d6ff9a" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="gTetes" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#ffffff" stop-opacity=".05" />
+              <stop offset=".7" stop-color="#bfe8c8" stop-opacity=".16" />
+              <stop offset="1" stop-color="#ffffff" stop-opacity=".5" />
+            </radialGradient>
+            <filter id="fBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14" /></filter>
+            <filter id="fBayang" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3" /></filter>
+          </defs>
+
+          <rect width="1600" height="900" fill="url(#gBase)" />
+
+          <g filter="url(#fBlur)">
+            <circle cx="1250" cy="160" r="90" fill="url(#gBokeh)" />
+            <circle cx="900" cy="120" r="60" fill="url(#gBokeh)" />
+            <circle cx="1450" cy="430" r="110" fill="url(#gBokeh)" />
+            <circle cx="700" cy="700" r="80" fill="url(#gBokeh)" />
+            <circle cx="1100" cy="820" r="70" fill="url(#gBokeh)" />
+            <circle cx="300" cy="300" r="100" fill="url(#gBokeh)" />
+            <circle cx="200" cy="700" r="90" fill="url(#gBokeh)" />
+          </g>
+
+          <!-- Daun belakang (agak kabur untuk kesan kedalaman) -->
+          <g transform="translate(780 70) scale(.85)" filter="url(#fBayang)" opacity=".9">
+            <path d="M920 1020 C 960 740, 760 420, 330 250 C 300 520, 460 840, 920 1020 Z" fill="url(#gDaun2)" />
+            <path d="M920 1020 C 760 760, 560 480, 330 250" fill="none" stroke="#a6e38a" stroke-opacity=".35" stroke-width="5" stroke-linecap="round" />
+          </g>
+
+          <!-- Daun utama + tetesan air -->
+          <g transform="translate(560 -60) scale(.93)">
+            <path id="leaf1Path" d="M60 1010 C 20 700, 200 330, 780 110 C 860 420, 700 800, 60 1010 Z" fill="url(#gDaun1)" />
+            <path d="M60 1010 C 20 700, 200 330, 780 110 C 860 420, 700 800, 60 1010 Z" fill="url(#gKilauDaun)" />
+            <g fill="none" stroke="#c9f5a6" stroke-linecap="round">
+              <path d="M60 1010 C 280 700, 520 400, 780 110" stroke-opacity=".5" stroke-width="7" />
+              <g stroke-opacity=".28" stroke-width="3.5">
+                <path d="M229 779 Q 160 745 118 690" />
+                <path d="M229 779 Q 330 790 480 735" />
+                <path d="M405 553 Q 300 540 240 485" />
+                <path d="M405 553 Q 560 560 700 510" />
+                <path d="M589 329 Q 530 310 490 265" />
+                <path d="M589 329 Q 700 340 770 335" />
+              </g>
+            </g>
+            <g id="tetes"></g>
+          </g>
+        </svg>
+
+        <div id="sceneFoto" class="scene-foto"></div>
+        <div class="scene-vignette"></div>
+      </div>
+
+      <div class="hero-panel glass" id="heroPanel">
+        <div class="hero-isi" id="heroIsi">
+          <p class="eyebrow anim">Human Capital &amp; General Affairs</p>
+          <h1 id="judul">Semua aplikasi HCGA, <em>satu pintu masuk.</em></h1>
+          <p class="lead anim">Pilih unit kerja, baca petunjuk singkat, lalu buka aplikasi yang Anda butuhkan.</p>
+          <div class="cta-row anim">
+            <a class="btn-utama" href="#menu">Jelajahi Aplikasi</a>
+            <button id="btnBgHero" class="btn-kaca" type="button" aria-expanded="false" aria-controls="panelBg">Ganti background</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-ctrl">
+        <div id="dots" class="dots" role="group" aria-label="Pilih background"></div>
+        <div class="arrows">
+          <button id="slidePrev" class="icon-btn" type="button" aria-label="Background sebelumnya">←</button>
+          <button id="slideNext" class="icon-btn" type="button" aria-label="Background berikutnya">→</button>
+        </div>
+      </div>
     </section>
 
     <section id="menu" class="menu-wrap">
@@ -41,9 +141,9 @@
 
     <section id="kalender" class="kal-wrap reveal">
       <div class="kal-head-bar">
-        <button id="kalPrev" class="icon-btn" aria-label="Bulan sebelumnya">‹</button>
+        <button id="kalPrev" class="icon-btn" type="button" aria-label="Bulan sebelumnya">‹</button>
         <h2 id="kalJudul"></h2>
-        <button id="kalNext" class="icon-btn" aria-label="Bulan berikutnya">›</button>
+        <button id="kalNext" class="icon-btn" type="button" aria-label="Bulan berikutnya">›</button>
       </div>
       <div id="kalGrid" class="kal-grid"></div>
       <p class="kal-note">Kalender ini hanya untuk tampilan. Catat memo di menu Info Memo dan Agenda.</p>
@@ -52,8 +152,11 @@
 
   <footer class="footer">Tim HCGA · Web Induk Aplikasi</footer>
 
+  <input id="fileBg" type="file" accept="image/*" hidden />
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
   <div id="loginOverlay" class="overlay" hidden>
-    <form id="formLogin" class="login-card">
+    <form id="formLogin" class="login-card glass">
       <h2>Masuk</h2>
       <p>Gunakan akun email internal organisasi.</p>
       <label>Email<input id="email" type="email" required autocomplete="username" /></label>
